@@ -1,4 +1,4 @@
-
+//applied concept from freeCodeCamp https://youtu.be/rAUn1Lom6dw and used my own logic to build a tetris game.
 
 
 
@@ -6,10 +6,19 @@
 for (let i = 0; i < 200; i++) {
     let div = document.createElement("div");
     div.className = "divs";
-    div.innerHTML = i
+    // div.innerHTML = i
     document.querySelector(".grid").appendChild(div);
-
 }
+
+//creates 10 extra divs using forloop
+for (let i = 0; i < 10; i++) {
+    let taken = document.createElement("div");
+    taken.className = "taken";
+     taken.innerHTML = i
+    document.querySelector(".grid").appendChild(taken);
+}
+
+
 document.addEventListener('DOMContentLoaded', ()=>{
 const grid = document.querySelector('.grid');
 const scoreDisplay = document.querySelector('#score');
@@ -18,8 +27,11 @@ const width = 10;
 
 //push all divs into an array
 let gridSquares = [];
-let squares = document.getElementsByClassName('divs');
+let squares = document.querySelectorAll('.grid div')
+
+
 gridSquares.push(squares);
+
 // console.log(squares)
 
 
@@ -61,20 +73,66 @@ const lTetromino = [
 const tetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino];
 
 let currentPosition = 4;
-let current = tetrominoes[0][0];
-// console.log(tetrominoes)
+let currentRotation = 0;
 
-//draw the first rotation in the first tetromino
+
+//randomly select a tetromino and a random rotation
+let random = Math.floor(Math.random()*tetrominoes.length);
+
+let current = tetrominoes[random][0];
+
+
+//draw the tetromino
 function draw(){
     current.forEach(index=>{
         squares[currentPosition+index].classList.add('tetromino')
     })
 }
 
-
-draw()
+//undraw the tetromino
+function undraw(){
+    current.forEach(index=>{
+        squares[currentPosition+index].classList.remove('tetromino');
+    })
+}
 
  
+//move tetromino down every second
+timerId= setInterval (down, 200);
+
+//move down fuction
+function down (){
+    undraw()
+    currentPosition += width
+    draw()
+    freeze()
+}
+
+//freeze function
+function freeze(){
+    if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
+        current.forEach(index => squares[currentPosition +index].classList.add('taken'))
+        //a new tetromino starts falling
+        random = Math.floor(Math.random() * tetrominoes.length);
+        current = tetrominoes[random][currentRotation]
+        currentPosition = 4
+        draw()
+    }
+}
+
+
+// move the tetromino left, unless there is a blockage or is at the edge of the board.
+function moveLeft(){
+    undraw()
+    const leftEdgeTrue = current.some(index => (currentPosition + index) % width === 0)
+}
+
+
+
+
+
+
+
 })
 
 
