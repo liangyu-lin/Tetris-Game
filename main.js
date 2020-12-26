@@ -19,11 +19,21 @@ for (let i = 0; i < 10; i++) {
 }
 
 
+//creates 16 divs inside mini-grid using forloop
+for (let i = 0; i < 16; i++) {
+    let mini = document.createElement("div");
+    mini.className = "mini";
+    //  mini.innerHTML = i
+    document.querySelector(".mini-grid").appendChild(mini);
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
     const scoreDisplay = document.querySelector('#score');
     const startBtn = document.querySelector('#startBtn');
     const width = 10;
+    let nextRandom = 0
 
     //push all divs into an array
     let gridSquares = [];
@@ -127,10 +137,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
             current.forEach(index => squares[currentPosition + index].classList.add('taken'))
             //a new tetromino starts falling
-            random = Math.floor(Math.random() * tetrominoes.length);
+            random = nextRandom
+            nextRandom = Math.floor(Math.random() * tetrominoes.length);
             current = tetrominoes[random][currentRotation]
             currentPosition = 4
             draw()
+            displayShape()
         }
     }
 
@@ -192,5 +204,44 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
         freeze()
     }
+
+
+    // show the next tetromino in mini grid
+    const displayNext = document.querySelectorAll(".mini")
+    const displayWidth = 4
+    let displayIndex = 0
+
+
+    //tetrominoes without rotation
+    const nextTetromino = [
+        [1, displayWidth + 1, displayWidth * 2 + 1, 2], //lTetromino
+        [0, displayWidth, displayWidth + 1, displayWidth * 2 + 1], //zTetromino
+        [1, displayWidth, displayWidth + 1, displayWidth + 2], //tTetromino
+        [0, 1, displayWidth, displayWidth + 1], //oTetromino
+        [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1] //iTetromino
+    ]
+
+
+    // display the shape in minigrid
+    function displayShape() {
+        //remove tetromino from grid
+        displayNext.forEach(square => {
+            square.classList.remove('tetromino')
+        })
+        nextTetromino[nextRandom].forEach(index => {
+            displayNext[displayIndex + index].classList.add('tetromino')
+        })
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 })
