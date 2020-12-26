@@ -277,7 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     squares[index].classList.remove('taken')
                     squares[index].classList.remove('tetromino')
                     squares[index].style.backgroundColor = ''
-
+                    let soundEffect = new Audio("sounds/scoring.mp3");
+                    soundEffect.play()
 
 
                 })
