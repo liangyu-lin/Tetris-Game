@@ -1,46 +1,56 @@
-//applied concept from freeCodeCamp https://youtu.be/rAUn1Lom6dw and used my own logic to build a tetris game.
-
-
-
-//creates 200 divs using forloop
-for (let i = 0; i < 200; i++) {
-    let div = document.createElement("div");
-    div.className = "divs";
-    // div.innerHTML = i
-    document.querySelector(".grid").appendChild(div);
-}
-
-//creates 10 extra divs using forloop
-for (let i = 0; i < 10; i++) {
-    let taken = document.createElement("div");
-    taken.className = "taken";
-    //  taken.innerHTML = i
-    document.querySelector(".grid").appendChild(taken);
-}
-
-
-//creates 16 divs inside mini-grid using forloop
-for (let i = 0; i < 16; i++) {
-    let mini = document.createElement("div");
-    mini.className = "mini";
-    //  mini.innerHTML = i
-    document.querySelector(".mini-grid").appendChild(mini);
-}
-
-
 document.addEventListener('DOMContentLoaded', () => {
+    //applied concept from freeCodeCamp https://youtu.be/rAUn1Lom6dw and used my understandings to apply for loops to build a tetris game.
+
+
+
+
+    //creates 200 divs using forloop
+    for (let i = 0; i < 200; i++) {
+        let div = document.createElement("div");
+        div.className = "divs";
+        //    div.innerHTML = i;
+        document.querySelector(".grid").appendChild(div);
+    }
+
+    //creates 10 extra divs using forloop
+    for (let i = 0; i < 10; i++) {
+        let taken = document.createElement("div");
+        taken.className = "taken";
+        //  taken.innerHTML = i
+        document.querySelector(".grid").appendChild(taken);
+    }
+
+
+    //creates 16 divs inside mini-grid using forloop
+    for (let i = 0; i < 16; i++) {
+        let mini = document.createElement("div");
+        mini.className = "mini";
+        //  mini.innerHTML = i
+        document.querySelector(".mini-grid").appendChild(mini);
+    }
+    let squares = Array.from(document.querySelectorAll('.grid div'))
+
+
     const grid = document.querySelector('.grid');
     const scoreDisplay = document.querySelector('#score');
     const startBtn = document.querySelector('#startBtn');
     const width = 10;
     let nextRandom = 0
+    let timerId;
+    let score = 0;
+    const colors = [
+        'red',
+        'orange',
+        'green',
+        'blue',
+        'purple'
 
-    //push all divs into an array
-    let gridSquares = [];
-    let squares = document.querySelectorAll('.grid div')
+
+    ]
 
 
-    gridSquares.push(squares);
+
+
 
     // console.log(squares)
 
@@ -96,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function draw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.add('tetromino')
+            squares[currentPosition + index].style.backgroundColor = colors[random]
         })
     }
 
@@ -103,12 +114,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function undraw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.remove('tetromino');
+            squares[currentPosition + index].style.backgroundColor = ''
         })
     }
 
 
     //Drop tetromino down every second
-    timerId = setInterval(dropDown, 1000);
+    // timerId = setInterval(dropDown, 1000);
 
     //assign functions to keyCodes
     function control(e) {
@@ -143,6 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
             currentPosition = 4
             draw()
             displayShape()
+            addScore()
+            gameOver()
         }
     }
 
@@ -227,17 +241,60 @@ document.addEventListener('DOMContentLoaded', () => {
         //remove tetromino from grid
         displayNext.forEach(square => {
             square.classList.remove('tetromino')
+            square.style.backgroundColor=''
         })
         nextTetromino[nextRandom].forEach(index => {
             displayNext[displayIndex + index].classList.add('tetromino')
+            displayNext[displayIndex + index].style.backgroundColor = colors[nextRandom]
         })
     }
 
 
+    // add button
+    startBtn.addEventListener('click', () => {
+        if (timerId) {
+            clearInterval(timerId)
+            timerId = null
+        } else {
+            draw()
+            timerId = setInterval(dropDown, 1000)
+            nextRandom = Math.floor(Math.random() * tetrominoes.length)
+            displayShape()
+        }
+    })
 
 
 
+    //add score
+    function addScore() {
+        for (let i = 0; i < 199; i += width) {
+            const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9]
 
+            if (row.every(index => squares[index].classList.contains('taken'))) {
+                score += 10
+                scoreDisplay.innerHTML = score
+                row.forEach(index => {
+                    squares[index].classList.remove('taken')
+                    squares[index].classList.remove('tetromino')
+                    squares[index].style.backgroundColor = ''
+
+
+
+                })
+                const squaresRemoved = squares.splice(i, width)
+                squares = squaresRemoved.concat(squares)
+                squares.forEach(cell => grid.appendChild(cell))
+            }
+        }
+    }
+
+    //game over
+    function gameOver() {
+        if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            scoreDisplay.innerHTML = 'end'
+            clearInterval(timerId)
+        }
+    }
 
 
 
