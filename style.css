@@ -2,6 +2,7 @@ body {
     background-color: #98c1d9;
     font-family: Arvo,
         cursive;
+        overflow: hidden;
 }
 
 h1 {
@@ -17,7 +18,7 @@ h2 {
     text-align: center;
     margin-left: 600px;
     margin-top: -480px;
-    
+
 }
 
 
@@ -31,16 +32,17 @@ footer {
 }
 
 .btn-1 {
-          background-image: linear-gradient(to right, #98c1d9 0%, #e0fbfc 51%, #98c1d9 100%);
+    background-image: linear-gradient(to right, #98c1d9 0%, #e0fbfc 51%, #98c1d9 100%);
 }
 
 .btn-1:hover {
     background-position: right center;
     /* change the direction of the change here */
 }
+
 .btn-1:active,
 .btn-1:focus,
-.btn-1:visited{
+.btn-1:visited {
     border: none;
 }
 
@@ -100,4 +102,26 @@ footer {
 .mini {
     height: 30px;
     width: 30px;
+}
+
+@media screen and (max-width: 1280px) {
+
+    /* Styles for Desktops */
+    h1 {
+        font-size: 1.72rem;
+        color: #dbedf3;
+
+        text-shadow: 3px 0 #010369;
+        text-align: center;
+    }
+
+   footer {
+       color: #fff;
+       font-family: sans-serif;
+       margin-top: 460px;
+       text-align: center;
+       font-size: 16px;
+   }
+
+
 }
