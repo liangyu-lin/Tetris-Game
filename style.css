@@ -1,36 +1,103 @@
-.container{
+body {
+    background-color: #98c1d9;
+    font-family: Arvo,
+        cursive;
+}
+
+h1 {
+    font-size: 5rem;
+    color: #dbedf3;
+
+    text-shadow: 3px 0 #010369;
+    text-align: center;
+}
+
+h2 {
+    color: #1a535c;
+    text-align: center;
+    margin-left: 600px;
+    margin-top: -480px;
+    
+}
+
+
+
+footer {
+    color: #fff;
+    font-family: sans-serif;
+    margin-top: 525px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.btn-1 {
+          background-image: linear-gradient(to right, #98c1d9 0%, #e0fbfc 51%, #98c1d9 100%);
+}
+
+.btn-1:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+}
+.btn-1:active,
+.btn-1:focus,
+.btn-1:visited{
+    border: none;
+}
+
+#startBtn {
+
+    margin-top: 120px;
+    margin-left: 50px;
+    border: none;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: #1a535c;
+    /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+    box-shadow: 0 0 20px #eee;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.container {
     display: flex;
     justify-content: center;
 }
 
-.grid{
-    width: 200px;
-    height: 400px;
+.grid {
+    width: 600px;
+    height: 690px;
     display: flex;
     flex-wrap: wrap;
-    background-color: yellow;
+    background-color: #e0fbfc;
+    border-radius: 5px;
 }
 
 .grid div {
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
     /* background-color: red; */
+    border-radius: 5px;
+
 }
 
 .tetromino {
-background-color: blue;
+    background-color: blue;
 }
 
-.mini-grid{
+.mini-grid {
     margin-left: 50px;
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
     display: flex;
     flex-wrap: wrap;
-    background-color: yellow;
+    background-color: #e0fbfc;
+    border-radius: 5px;
 }
 
 .mini {
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
 }

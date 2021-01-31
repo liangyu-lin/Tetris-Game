@@ -4,16 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    //creates 200 divs using forloop
-    for (let i = 0; i < 200; i++) {
+    //creates 460 divs using forloop
+    for (let i = 0; i < 460; i++) {
         let div = document.createElement("div");
         div.className = "divs";
-        //    div.innerHTML = i;
+        // div.innerHTML = i;
         document.querySelector(".grid").appendChild(div);
     }
 
-    //creates 10 extra divs using forloop
-    for (let i = 0; i < 10; i++) {
+    //creates 20 extra divs using forloop
+    for (let i = 0; i < 20; i++) {
         let taken = document.createElement("div");
         taken.className = "taken";
         //  taken.innerHTML = i
@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //creates 16 divs inside mini-grid using forloop
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 25; i++) {
         let mini = document.createElement("div");
         mini.className = "mini";
-        //  mini.innerHTML = i
+        // mini.innerHTML = i
         document.querySelector(".mini-grid").appendChild(mini);
     }
     let squares = Array.from(document.querySelectorAll('.grid div'))
@@ -34,16 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
     const scoreDisplay = document.querySelector('#score');
     const startBtn = document.querySelector('#startBtn');
-    const width = 10;
+    const width = 20;
     let nextRandom = 0
     let timerId;
     let score = 0;
     const colors = [
-        'red',
-        'orange',
-        'green',
-        'blue',
-        'purple'
+        '#9b5de5',
+        '#f15bb5',
+        '#fee440',
+        '#00bbf9',
+        '#00f5d4'
 
 
     ]
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // show the next tetromino in mini grid
     const displayNext = document.querySelectorAll(".mini")
-    const displayWidth = 4
+    const displayWidth = 5
     let displayIndex = 0
 
 
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //remove tetromino from grid
         displayNext.forEach(square => {
             square.classList.remove('tetromino')
-            square.style.backgroundColor=''
+            square.style.backgroundColor = ''
         })
         nextTetromino[nextRandom].forEach(index => {
             displayNext[displayIndex + index].classList.add('tetromino')
@@ -267,11 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //add score
     function addScore() {
-        for (let i = 0; i < 199; i += width) {
-            const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9]
+        for (let i = 0; i < 460; i += width) {
+            const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9, i + 10, i + 11, i + 12, i + 13, i + 14, i + 15, i + 16, i + 17, i + 18, i + 19]
 
             if (row.every(index => squares[index].classList.contains('taken'))) {
-                score += 10
+                score += 20
                 scoreDisplay.innerHTML = score
                 row.forEach(index => {
                     squares[index].classList.remove('taken')
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //game over
     function gameOver() {
         if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-            scoreDisplay.innerHTML = 'end'
+            scoreDisplay.innerHTML = ' end'
             clearInterval(timerId)
         }
     }
