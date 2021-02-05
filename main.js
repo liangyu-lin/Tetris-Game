@@ -4,19 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    //creates 460 divs using forloop
-    for (let i = 0; i < 340; i++) {
+    //creates 180 divs using forloop
+    for (let i = 0; i < 180; i++) {
         let div = document.createElement("div");
         div.className = "divs";
         // div.innerHTML = i;
         document.querySelector(".grid").appendChild(div);
     }
 
-    //creates 20 extra divs using forloop
-    for (let i = 0; i < 20; i++) {
+    //creates 10 extra divs using forloop
+    for (let i = 0; i < 10; i++) {
         let taken = document.createElement("div");
         taken.className = "taken";
-        //  taken.innerHTML = i
+        // taken.innerHTML = i
         document.querySelector(".grid").appendChild(taken);
     }
 
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
     const scoreDisplay = document.querySelector('#score');
     const startBtn = document.querySelector('#startBtn');
-    const width = 20;
+    const width = 10;
     let nextRandom = 0
     let timerId;
     let score = 0;
@@ -267,11 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //add score
     function addScore() {
-        for (let i = 0; i < 340; i += width) {
-            const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9, i + 10, i + 11, i + 12, i + 13, i + 14, i + 15, i + 16, i + 17, i + 18, i + 19]
+        for (let i = 0; i < 180; i += width) {
+            const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9]
 
             if (row.every(index => squares[index].classList.contains('taken'))) {
-                score += 20
+                score += 10
                 scoreDisplay.innerHTML = score
                 row.forEach(index => {
                     squares[index].classList.remove('taken')
