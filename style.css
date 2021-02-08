@@ -6,7 +6,7 @@ body {
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 4rem;
     color: #dbedf3;
 
     text-shadow: 3px 0 #010369;
@@ -108,9 +108,9 @@ footer {
 
     /* Styles for Desktops */
     h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         color: #dbedf3;
-        margin-bottom: 100px;
+        margin-bottom: 30px;
         text-shadow: 3px 0 #010369;
         text-align: center;
     }
